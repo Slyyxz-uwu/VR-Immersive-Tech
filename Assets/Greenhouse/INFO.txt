@@ -1,0 +1,10 @@
+The package contains a handful collection of structures and props to build your own realistic Greenhouse.
+
+	--- INFO---
+Prefab Count: 69
+Average Model Count: 1500 Vertices (Min:28 - Max:6376)
+Textures: Up to 4K Resolution
+Colliders: All models have Mesh Coliders
+Materials: All materials use Unity's Build-in Shaders
+
+Note! - The demo scene is included.
