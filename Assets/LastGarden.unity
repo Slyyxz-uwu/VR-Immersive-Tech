@@ -9871,6 +9871,8 @@ MonoBehaviour:
   tilledSoilPrefab: {fileID: 1689076489521159162, guid: 1936f238e71db4531bfe8d26742e2d98, type: 3}
   maxTiles: 5
   tillAnimationTime: 1
+  soilScale: {x: 3, y: 3, z: 3}
+  minSpacing: 2
   grabInteractable: {fileID: 1638507441}
   triggerAction: {fileID: 5437799948467623810, guid: db16cc914f6a5d64d8272b0aeee3f9c9, type: 3}
 --- !u!65 &1638507444
