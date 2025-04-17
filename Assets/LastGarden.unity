@@ -6508,8 +6508,8 @@ Transform:
   m_GameObject: {fileID: 635336634}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 76.67, y: 0.04, z: 39.54}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 76.67, y: 0.46, z: 39.54}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -9376,7 +9376,7 @@ GameObject:
   - component: {fileID: 1562142461}
   m_Layer: 0
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Soil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -9869,7 +9869,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilledSoilPrefab: {fileID: 1689076489521159162, guid: 1936f238e71db4531bfe8d26742e2d98, type: 3}
-  soilSpawnPoint: {fileID: 635336635}
   maxTiles: 5
   tillAnimationTime: 1
   grabInteractable: {fileID: 1638507441}
