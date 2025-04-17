@@ -12,11 +12,18 @@ public class RakeTool : MonoBehaviour
     public float tillAnimationTime = 1f;
 
     [Header("Soil Appearance")]
-    public Vector3 soilScale = new Vector3(1.5f, 1f, 1.5f); // Width, Height, Depth
+    public Vector3 soilScale = new Vector3(1.5f, 1f, 1.5f);
 
     [Header("Soil Placement Control")]
     public float minSpacing = 1.5f;
     private List<Vector3> placedSoilPositions = new List<Vector3>();
+
+    [Header("Ghost Tile")]
+    public GameObject ghostTilePrefab;
+    private GameObject ghostTileInstance;
+
+    [Header("Raking Particles")]
+    public ParticleSystem rakeParticles;
 
     [Header("XR Input")]
     public XRGrabInteractable grabInteractable;
@@ -47,14 +54,20 @@ public class RakeTool : MonoBehaviour
 
     private void OnGrab(SelectEnterEventArgs args) => isHeld = true;
 
-    private void OnRelease(SelectExitEventArgs args) => isHeld = false;
+    private void OnRelease(SelectExitEventArgs args)
+    {
+        isHeld = false;
+        HideGhostTile();
+        StopParticles();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Soil"))
         {
-            Debug.Log("Soil detected.");
             touchingSoil = true;
+            ShowGhostTile();
+            PlayParticles();
         }
     }
 
@@ -63,41 +76,57 @@ public class RakeTool : MonoBehaviour
         if (other.CompareTag("Soil"))
         {
             touchingSoil = false;
+            HideGhostTile();
+            StopParticles();
         }
     }
 
     private void Update()
     {
         if (!isHeld || !touchingSoil || isTilling || tilesSpawned >= maxTiles)
+        {
+            HideGhostTile();
             return;
+        }
 
         float triggerValue = triggerAction.action.ReadValue<float>();
-
-        if (triggerValue > 0.5f)
-        {
-            StartCoroutine(SpawnSoilSmooth());
-        }
-    }
-
-    private IEnumerator<WaitForEndOfFrame> SpawnSoilSmooth()
-    {
-        isTilling = true;
-
-        if (tilledSoilPrefab == null)
-        {
-            Debug.LogWarning("Missing soil prefab!");
-            yield break;
-        }
 
         Vector3 spawnPosition = transform.position;
         spawnPosition.y = 0.01f;
 
-        // Check for spacing
+        // Update ghost tile position and show/hide based on spacing
+        if (ghostTileInstance != null)
+        {
+            ghostTileInstance.transform.position = spawnPosition;
+            bool tooClose = false;
+
+            foreach (Vector3 pos in placedSoilPositions)
+            {
+                if (Vector3.Distance(pos, spawnPosition) < minSpacing)
+                {
+                    tooClose = true;
+                    break;
+                }
+            }
+
+            ghostTileInstance.SetActive(!tooClose);
+        }
+
+        if (triggerValue > 0.5f)
+        {
+            StartCoroutine(SpawnSoilSmooth(spawnPosition));
+        }
+    }
+
+    private System.Collections.IEnumerator SpawnSoilSmooth(Vector3 spawnPosition)
+    {
+        isTilling = true;
+
+        // Check spacing again before spawning
         foreach (Vector3 pos in placedSoilPositions)
         {
             if (Vector3.Distance(pos, spawnPosition) < minSpacing)
             {
-                Debug.Log("Too close to another tile.");
                 isTilling = false;
                 yield break;
             }
@@ -115,10 +144,44 @@ public class RakeTool : MonoBehaviour
             timer += Time.deltaTime;
             float t = timer / tillAnimationTime;
             soilTile.transform.localScale = Vector3.Lerp(Vector3.zero, soilScale, t);
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         soilTile.transform.localScale = soilScale;
         isTilling = false;
+    }
+
+    private void ShowGhostTile()
+    {
+        if (ghostTilePrefab == null || ghostTileInstance != null)
+            return;
+
+        ghostTileInstance = Instantiate(ghostTilePrefab);
+        ghostTileInstance.transform.localScale = soilScale;
+    }
+
+    private void HideGhostTile()
+    {
+        if (ghostTileInstance != null)
+        {
+            Destroy(ghostTileInstance);
+            ghostTileInstance = null;
+        }
+    }
+
+    private void PlayParticles()
+    {
+        if (rakeParticles != null && !rakeParticles.isPlaying)
+        {
+            rakeParticles.Play();
+        }
+    }
+
+    private void StopParticles()
+    {
+        if (rakeParticles != null && rakeParticles.isPlaying)
+        {
+            rakeParticles.Stop();
+        }
     }
 }
