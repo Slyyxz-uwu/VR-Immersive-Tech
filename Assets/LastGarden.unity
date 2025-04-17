@@ -664,7 +664,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
+  - {fileID: 2100000, guid: 08c4b67273e724941900639ca93caabc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -732,9 +732,9 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -853,7 +853,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 0.3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -971,7 +971,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -14538,8 +14538,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.19759943, y: 0.112632364, z: 0.40383333}
-  m_Center: {x: -0.0015905388, y: -0.0038289616, z: 0.1047179}
+  m_Size: {x: 0.19759943, y: 0.14142975, z: 0.40383333}
+  m_Center: {x: -0.0015905385, y: -0.018227596, z: 0.1047179}
 --- !u!114 &1638507441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14707,7 +14707,7 @@ MonoBehaviour:
   soilScale: {x: 3, y: 5, z: 3}
   minSpacing: 2
   ghostTilePrefab: {fileID: 6752925611174364776, guid: 9edf7a8aeeb39f04792a41610368464a, type: 3}
-  rakeParticles: {fileID: 0}
+  rakeParticles: {fileID: 157586728}
   grabInteractable: {fileID: 1638507441}
   triggerAction: {fileID: 5437799948467623810, guid: db16cc914f6a5d64d8272b0aeee3f9c9, type: 3}
 --- !u!65 &1638507444
@@ -14729,8 +14729,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.19759943, y: 0.112632364, z: 0.40383333}
-  m_Center: {x: -0.0015905388, y: -0.0038289616, z: 0.1047179}
+  m_Size: {x: 0.2064945, y: 0.112632364, z: 0.40383333}
+  m_Center: {x: -0.006038053, y: -0.003828959, z: 0.1047179}
 --- !u!1001 &1657907244
 PrefabInstance:
   m_ObjectHideFlags: 0

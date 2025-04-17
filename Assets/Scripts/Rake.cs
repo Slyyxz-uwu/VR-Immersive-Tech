@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
@@ -22,7 +22,7 @@ public class RakeTool : MonoBehaviour
     public GameObject ghostTilePrefab;
     private GameObject ghostTileInstance;
 
-    [Header("Raking Particles")]
+    [Header("Raking Particle Effect")]
     public ParticleSystem rakeParticles;
 
     [Header("XR Input")]
@@ -52,13 +52,15 @@ public class RakeTool : MonoBehaviour
             triggerAction.action.Disable();
     }
 
-    private void OnGrab(SelectEnterEventArgs args) => isHeld = true;
+    private void OnGrab(SelectEnterEventArgs args)
+    {
+        isHeld = true;
+    }
 
     private void OnRelease(SelectExitEventArgs args)
     {
         isHeld = false;
         HideGhostTile();
-        StopParticles();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -67,7 +69,6 @@ public class RakeTool : MonoBehaviour
         {
             touchingSoil = true;
             ShowGhostTile();
-            PlayParticles();
         }
     }
 
@@ -77,7 +78,6 @@ public class RakeTool : MonoBehaviour
         {
             touchingSoil = false;
             HideGhostTile();
-            StopParticles();
         }
     }
 
@@ -98,8 +98,8 @@ public class RakeTool : MonoBehaviour
         if (ghostTileInstance != null)
         {
             ghostTileInstance.transform.position = spawnPosition;
-            bool tooClose = false;
 
+            bool tooClose = false;
             foreach (Vector3 pos in placedSoilPositions)
             {
                 if (Vector3.Distance(pos, spawnPosition) < minSpacing)
@@ -118,11 +118,10 @@ public class RakeTool : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator SpawnSoilSmooth(Vector3 spawnPosition)
+    private IEnumerator<WaitForEndOfFrame> SpawnSoilSmooth(Vector3 spawnPosition)
     {
         isTilling = true;
 
-        // Check spacing again before spawning
         foreach (Vector3 pos in placedSoilPositions)
         {
             if (Vector3.Distance(pos, spawnPosition) < minSpacing)
@@ -130,6 +129,12 @@ public class RakeTool : MonoBehaviour
                 isTilling = false;
                 yield break;
             }
+        }
+
+        // ✅ Play dust particle burst
+        if (rakeParticles != null)
+        {
+            rakeParticles.Play();
         }
 
         GameObject soilTile = Instantiate(tilledSoilPrefab, spawnPosition, Quaternion.identity);
@@ -144,7 +149,7 @@ public class RakeTool : MonoBehaviour
             timer += Time.deltaTime;
             float t = timer / tillAnimationTime;
             soilTile.transform.localScale = Vector3.Lerp(Vector3.zero, soilScale, t);
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
 
         soilTile.transform.localScale = soilScale;
@@ -166,22 +171,6 @@ public class RakeTool : MonoBehaviour
         {
             Destroy(ghostTileInstance);
             ghostTileInstance = null;
-        }
-    }
-
-    private void PlayParticles()
-    {
-        if (rakeParticles != null && !rakeParticles.isPlaying)
-        {
-            rakeParticles.Play();
-        }
-    }
-
-    private void StopParticles()
-    {
-        if (rakeParticles != null && rakeParticles.isPlaying)
-        {
-            rakeParticles.Stop();
         }
     }
 }
