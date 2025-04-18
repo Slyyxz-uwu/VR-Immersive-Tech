@@ -8,6 +8,12 @@ TagManager:
   - Water
   - Soil
   - DiggableSoil
+  - CabbageSeed
+  - CarrotSeed
+  - TomatoSeed
+  - CucumberSeed
+  - PepperSeed
+  - SoilTile
   layers:
   - Default
   - TransparentFX

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cucumber Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1465940820440611917, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
+      propertyPath: m_TagString
+      value: CucumberSeed
+      objectReference: {fileID: 0}
     - target: {fileID: 2239346488677967607, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.6

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tomato Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1191080296971304095, guid: efcb51d1c0202a745aca84e8e0cec8b0, type: 3}
+      propertyPath: m_TagString
+      value: TomatoSeed
+      objectReference: {fileID: 0}
     - target: {fileID: 2003048041224906277, guid: efcb51d1c0202a745aca84e8e0cec8b0, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5

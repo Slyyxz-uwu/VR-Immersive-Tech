@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class SeedDropOnShake : MonoBehaviour
 {
     [Header("Seed Settings")]
-    public GameObject seedPrefab;
+    public GameObject seedPrefab; // Assign specific seed prefab per veggie
     public int maxSeeds = 2;
 
     [Header("Shake Detection")]
@@ -17,7 +17,7 @@ public class SeedDropOnShake : MonoBehaviour
     [Header("Audio")]
     public AudioSource audioSource;
     public AudioClip[] shakeSounds;
-    public float audioCooldown = 0.5f; // ⏱️ Prevents audio spam
+    public float audioCooldown = 0.5f;
 
     private Rigidbody rb;
     private int seedsDropped = 0;
@@ -35,7 +35,7 @@ public class SeedDropOnShake : MonoBehaviour
 
     private void OnEnable()
     {
-        var grab = GetComponent<XRGrabInteractable>();
+        XRGrabInteractable grab = GetComponent<XRGrabInteractable>();
         if (grab != null)
         {
             grab.selectEntered.AddListener(OnGrab);
@@ -45,7 +45,7 @@ public class SeedDropOnShake : MonoBehaviour
 
     private void OnDisable()
     {
-        var grab = GetComponent<XRGrabInteractable>();
+        XRGrabInteractable grab = GetComponent<XRGrabInteractable>();
         if (grab != null)
         {
             grab.selectEntered.RemoveListener(OnGrab);
@@ -54,7 +54,6 @@ public class SeedDropOnShake : MonoBehaviour
     }
 
     private void OnGrab(SelectEnterEventArgs args) => isHeld = true;
-
     private void OnRelease(SelectExitEventArgs args) => isHeld = false;
 
     private void Update()
@@ -70,7 +69,6 @@ public class SeedDropOnShake : MonoBehaviour
 
         if (velocity > velocityThreshold)
         {
-            // ⏱️ Drop seed with cooldown
             if (Time.time - lastSeedTime > spawnCooldown && seedsDropped < maxSeeds)
             {
                 DropSeed();
@@ -78,14 +76,12 @@ public class SeedDropOnShake : MonoBehaviour
                 lastSeedTime = Time.time;
             }
 
-            // 🎵 Play shake sound with cooldown
             if (Time.time - lastAudioTime > audioCooldown)
             {
                 PlayShakeSound();
                 lastAudioTime = Time.time;
             }
 
-            // 🛑 Optional: stop updates when max is reached
             if (seedsDropped >= maxSeeds)
                 enabled = false;
         }
@@ -95,13 +91,12 @@ public class SeedDropOnShake : MonoBehaviour
     {
         if (seedPrefab == null) return;
 
-        Vector3 dropPosition = transform.position + new Vector3(0, 0.15f, 0);
+        Vector3 dropPosition = transform.position + new Vector3(0, 0.2f, 0);
         GameObject seed = Instantiate(seedPrefab, dropPosition, Quaternion.identity);
 
-        if (seed.TryGetComponent(out Rigidbody seedRb))
-            seedRb.velocity = Vector3.down * 0.5f;
-
-        Debug.Log($"[SEED DROP] Spawned seed: {seed.name} at {dropPosition}");
+        Rigidbody seedRb = seed.GetComponent<Rigidbody>();
+        if (seedRb != null)
+            seedRb.velocity = Vector3.down * 0.3f;
     }
 
     private void PlayShakeSound()
