@@ -13,6 +13,18 @@ PrefabInstance:
       value: Tomato Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2003048041224906277, guid: efcb51d1c0202a745aca84e8e0cec8b0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003048041224906277, guid: efcb51d1c0202a745aca84e8e0cec8b0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003048041224906277, guid: efcb51d1c0202a745aca84e8e0cec8b0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2003048041224906277, guid: efcb51d1c0202a745aca84e8e0cec8b0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
       objectReference: {fileID: 0}
@@ -56,6 +68,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 750a2b6dee8857c41b8a1d5b4dc76739, type: 2}
+    - target: {fileID: 7488581429015188668, guid: efcb51d1c0202a745aca84e8e0cec8b0, type: 3}
+      propertyPath: m_Size.y
+      value: 0.36857975
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488581429015188668, guid: efcb51d1c0202a745aca84e8e0cec8b0, type: 3}
+      propertyPath: m_Size.z
+      value: 0.2587846
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488581429015188668, guid: efcb51d1c0202a745aca84e8e0cec8b0, type: 3}
+      propertyPath: m_Center.y
+      value: -0.0072620213
+      objectReference: {fileID: 0}
+    - target: {fileID: 7488581429015188668, guid: efcb51d1c0202a745aca84e8e0cec8b0, type: 3}
+      propertyPath: m_Center.z
+      value: -0.018058475
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

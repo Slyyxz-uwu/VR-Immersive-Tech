@@ -5,7 +5,7 @@ public class SeedDropOnShake : MonoBehaviour
 {
     [Header("Seed Settings")]
     public GameObject seedPrefab;
-    public Transform spawnPoint;
+    public int maxTotalSeeds = 2;
 
     [Header("Shake Detection")]
     public float velocityThreshold = 1.5f;
@@ -15,11 +15,9 @@ public class SeedDropOnShake : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip[] shakeSounds;
 
-    [Header("Particles")]
-    public ParticleSystem shakeParticles;
-
     private Rigidbody rb;
     private float lastSpawnTime = -999f;
+    private int seedsDropped = 0;
 
     void Start()
     {
@@ -30,8 +28,9 @@ public class SeedDropOnShake : MonoBehaviour
 
     void Update()
     {
-        // Check if moving fast enough and cooldown has passed
-        if (rb.velocity.magnitude > velocityThreshold && Time.time - lastSpawnTime > spawnCooldown)
+        if (rb.velocity.magnitude > velocityThreshold
+            && Time.time - lastSpawnTime > spawnCooldown
+            && seedsDropped < maxTotalSeeds)
         {
             DropSeed();
             lastSpawnTime = Time.time;
@@ -40,24 +39,20 @@ public class SeedDropOnShake : MonoBehaviour
 
     void DropSeed()
     {
-        // Play audio
         if (audioSource != null && shakeSounds.Length > 0)
         {
             AudioClip clip = shakeSounds[Random.Range(0, shakeSounds.Length)];
             audioSource.PlayOneShot(clip);
         }
 
-        // Spawn seed
-        if (seedPrefab != null && spawnPoint != null)
+        if (seedPrefab != null)
         {
-            Instantiate(seedPrefab, spawnPoint.position, Quaternion.identity);
-        }
+            // Raise it more clearly above ground
+            Vector3 dropPosition = transform.position + transform.up * 0.6f + Random.insideUnitSphere * 0.05f;
 
-        // Play particles
-        if (shakeParticles != null)
-        {
-            shakeParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-            shakeParticles.Play();
+            GameObject seed = Instantiate(seedPrefab, dropPosition, Quaternion.identity);
+
+            Debug.Log($"[SEED DROP] Spawned seed: {seed.name} at {dropPosition}");
         }
     }
 }
