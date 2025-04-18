@@ -1,0 +1,11 @@
+Model Information:
+* title:	Grass Seed
+* source:	https://sketchfab.com/3d-models/grass-seed-d8b8ff09768d4302b152afb1d44e3e8f
+* author:	harri.wildridge (https://sketchfab.com/harri.wildridge)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Grass Seed" (https://sketchfab.com/3d-models/grass-seed-d8b8ff09768d4302b152afb1d44e3e8f) by harri.wildridge (https://sketchfab.com/harri.wildridge) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

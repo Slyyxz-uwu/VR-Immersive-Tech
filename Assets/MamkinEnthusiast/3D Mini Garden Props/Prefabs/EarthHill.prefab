@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9119316408904065611}
   m_Layer: 0
   m_Name: EarthHill
-  m_TagString: Untagged
+  m_TagString: DiggableSoil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -117,6 +117,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 80c75bfd336f84f58bc34f9c5fa99647, type: 3}
       propertyPath: m_Name
       value: EarthHill
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80c75bfd336f84f58bc34f9c5fa99647, type: 3}
+      propertyPath: m_TagString
+      value: DiggableSoil
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
