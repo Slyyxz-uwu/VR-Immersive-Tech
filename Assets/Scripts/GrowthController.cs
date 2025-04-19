@@ -26,9 +26,7 @@ public class GrowthController : MonoBehaviour
             Debug.Log("[SEED] Seed touched soil. Preparing to grow...");
             hasStartedGrowing = true;
 
-            GameObject soil = collision.collider.gameObject;
-            Vector3 spawnPoint = soil.transform.position + new Vector3(0, 0.01f, 0); // Slightly above ground
-
+            Vector3 spawnPoint = collision.transform.position + new Vector3(0f, 0.01f, 0f);
             StartCoroutine(GrowPlant(spawnPoint));
         }
     }
@@ -61,9 +59,8 @@ public class GrowthController : MonoBehaviour
             Instantiate(finalVeggie, endPos, Quaternion.identity);
         }
 
-        // ✅ DO NOT destroy the plant
-        // Destroy(gameObject); // still destroy the seed
-        Destroy(this.gameObject);
+        // ✅ Now destroy the seed
+        Destroy(gameObject);
     }
 
     private GameObject GetVegetableForSeed()
