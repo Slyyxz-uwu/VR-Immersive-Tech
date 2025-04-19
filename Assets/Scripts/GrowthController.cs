@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-[RequireComponent(typeof(SeedType))]
 public class GrowthController : MonoBehaviour
 {
     [Header("Growth Settings")]
@@ -16,39 +15,46 @@ public class GrowthController : MonoBehaviour
     public GameObject cabbagePrefab;
     public GameObject pepperPrefab;
 
-    private SeedType.VegetableType seedTypeValue;
-    private bool hasStartedGrowing = false;
+    private bool isWatered = false;
+    private GameObject plant;
+    private Transform spawnPoint;
 
-    void Start()
+    private void Start()
     {
-        seedTypeValue = GetComponent<SeedType>().seedType;
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (hasStartedGrowing) return;
-
-        if (collision.gameObject.CompareTag("SoilTile"))
+        // Set spawn point from soil
+        Collider[] hits = Physics.OverlapSphere(transform.position, 0.3f);
+        foreach (Collider hit in hits)
         {
-            Transform spawnPoint = collision.transform.Find("PlantSpawnPoint");
-            if (spawnPoint != null)
+            if (hit.CompareTag("SoilTile"))
             {
-                hasStartedGrowing = true;
-                StartCoroutine(GrowPlant(spawnPoint));
-            }
-            else
-            {
-                Debug.LogWarning("[GROWTH] No PlantSpawnPoint found on soil tile.");
+                spawnPoint = hit.transform.Find("PlantSpawnPoint");
+                break;
             }
         }
+
+        if (spawnPoint == null)
+        {
+            Debug.LogError("No PlantSpawnPoint found!");
+            return;
+        }
+
+        plant = Instantiate(plantPrefab, spawnPoint.position, Quaternion.identity);
+        StartCoroutine(GrowWhenWatered());
     }
 
-    IEnumerator GrowPlant(Transform spawnPoint)
+    public void SetWatered()
     {
-        GameObject plant = Instantiate(plantPrefab, spawnPoint.position, Quaternion.identity);
-        Vector3 startPos = plant.transform.position - new Vector3(0, riseHeight, 0);
-        Vector3 endPos = plant.transform.position;
-        plant.transform.position = startPos;
+        isWatered = true;
+    }
+
+    IEnumerator GrowWhenWatered()
+    {
+        Debug.Log("[GROWTH] Plant spawned. Waiting for water...");
+        yield return new WaitUntil(() => isWatered);
+
+        Debug.Log("[GROWTH] Water received. Growing...");
+        Vector3 startPos = plant.transform.position;
+        Vector3 endPos = startPos + new Vector3(0, riseHeight, 0);
 
         float timer = 0f;
         while (timer < growthDuration)
@@ -59,22 +65,23 @@ public class GrowthController : MonoBehaviour
             yield return null;
         }
 
-        plant.transform.position = endPos;
-
-        // 🌱 Replace plant with vegetable
+        // Swap plant with final vegetable
         GameObject finalVeg = GetVegetableForSeed();
         if (finalVeg != null)
         {
             Instantiate(finalVeg, plant.transform.position, Quaternion.identity);
-            // Keep the plant object for visual effect
         }
 
-        Destroy(gameObject); // ✅ Remove the seed at the END
+        Destroy(plant);
+        Destroy(gameObject); // Destroy seed
     }
 
     private GameObject GetVegetableForSeed()
     {
-        switch (seedTypeValue)
+        SeedType seed = GetComponent<SeedType>();
+        if (seed == null) return null;
+
+        switch (seed.vegType)
         {
             case SeedType.VegetableType.Carrot: return carrotPrefab;
             case SeedType.VegetableType.Cucumber: return cucumberPrefab;

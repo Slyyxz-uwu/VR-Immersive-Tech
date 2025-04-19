@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class WateringCan : MonoBehaviour
 {
@@ -107,6 +106,19 @@ public class WateringCan : MonoBehaviour
         else
         {
             StopSpraying();
+        }
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.CompareTag("SoilTile"))
+        {
+            GrowthController gc = other.GetComponentInChildren<GrowthController>();
+            if (gc != null)
+            {
+                gc.SetWatered();
+                Debug.Log("[WATER] Soil watered.");
+            }
         }
     }
 

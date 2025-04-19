@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SeedType : MonoBehaviour
 {
+    public VegetableType vegType;
+
     public enum VegetableType
     {
         Carrot,
@@ -10,6 +12,4 @@ public class SeedType : MonoBehaviour
         Cabbage,
         Pepper
     }
-
-    public VegetableType seedType;
 }
