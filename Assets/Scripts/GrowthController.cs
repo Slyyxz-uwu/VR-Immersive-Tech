@@ -1,83 +1,87 @@
+﻿using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SeedType))]
 public class GrowthController : MonoBehaviour
 {
     [Header("Growth Settings")]
     public GameObject plantPrefab;
-    public float baseGrowthTime = 20f;
+    public float growthDuration = 20f;
     public float riseHeight = 0.2f;
 
-    [Header("Final Vegetable Prefabs")]
+    [Header("Vegetable Prefabs")]
     public GameObject carrotPrefab;
     public GameObject cucumberPrefab;
     public GameObject tomatoPrefab;
     public GameObject cabbagePrefab;
     public GameObject pepperPrefab;
 
-    private GameObject growingPlant;
-    private float currentGrowthTime;
-    private bool isWatered = false;
-    private bool isGrowing = false;
+    private SeedType.VegetableType seedTypeValue;
+    private bool hasStartedGrowing = false;
 
-    private void OnTriggerEnter(Collider other)
+    void Start()
     {
-        if (!isGrowing && other.CompareTag("Seed"))
-        {
-            string tag = other.gameObject.tag;
-            GameObject finalPrefab = GetFinalPrefab(tag);
+        seedTypeValue = GetComponent<SeedType>().seedType;
+    }
 
-            if (finalPrefab != null)
+    void OnCollisionEnter(Collision collision)
+    {
+        if (hasStartedGrowing) return;
+
+        if (collision.gameObject.CompareTag("SoilTile"))
+        {
+            Transform spawnPoint = collision.transform.Find("PlantSpawnPoint");
+            if (spawnPoint != null)
             {
-                Destroy(other.gameObject); // Remove seed
-                StartCoroutine(GrowPlant(finalPrefab));
+                hasStartedGrowing = true;
+                StartCoroutine(GrowPlant(spawnPoint));
+            }
+            else
+            {
+                Debug.LogWarning("[GROWTH] No PlantSpawnPoint found on soil tile.");
             }
         }
     }
 
-    private GameObject GetFinalPrefab(string tag)
+    IEnumerator GrowPlant(Transform spawnPoint)
     {
-        switch (tag)
+        GameObject plant = Instantiate(plantPrefab, spawnPoint.position, Quaternion.identity);
+        Vector3 startPos = plant.transform.position - new Vector3(0, riseHeight, 0);
+        Vector3 endPos = plant.transform.position;
+        plant.transform.position = startPos;
+
+        float timer = 0f;
+        while (timer < growthDuration)
         {
-            case "Carrot": return carrotPrefab;
-            case "Cucumber": return cucumberPrefab;
-            case "Tomato": return tomatoPrefab;
-            case "Cabbage": return cabbagePrefab;
-            case "Pepper": return pepperPrefab;
-            default: return null;
-        }
-    }
-
-    private System.Collections.IEnumerator GrowPlant(GameObject finalPrefab)
-    {
-        isGrowing = true;
-        currentGrowthTime = baseGrowthTime;
-
-        // Spawn plant prefab rising from ground
-        Vector3 startPos = transform.position;
-        Vector3 endPos = startPos + Vector3.up * riseHeight;
-        growingPlant = Instantiate(plantPrefab, startPos, Quaternion.identity);
-
-        float elapsed = 0f;
-        while (elapsed < currentGrowthTime)
-        {
-            if (isWatered)
-                elapsed += Time.deltaTime * 2f; // Watering speeds up growth
-            else
-                elapsed += Time.deltaTime;
-
-            float t = Mathf.Clamp01(elapsed / currentGrowthTime);
-            growingPlant.transform.position = Vector3.Lerp(startPos, endPos, t);
-
+            float t = timer / growthDuration;
+            plant.transform.position = Vector3.Lerp(startPos, endPos, t);
+            timer += Time.deltaTime;
             yield return null;
         }
 
-        Destroy(growingPlant);
-        Instantiate(finalPrefab, endPos, Quaternion.identity);
-        isGrowing = false;
+        plant.transform.position = endPos;
+
+        // 🌱 Replace plant with vegetable
+        GameObject finalVeg = GetVegetableForSeed();
+        if (finalVeg != null)
+        {
+            Instantiate(finalVeg, plant.transform.position, Quaternion.identity);
+            // Keep the plant object for visual effect
+        }
+
+        Destroy(gameObject); // ✅ Remove the seed at the END
     }
 
-    public void WaterSoil()
+    private GameObject GetVegetableForSeed()
     {
-        isWatered = true;
+        switch (seedTypeValue)
+        {
+            case SeedType.VegetableType.Carrot: return carrotPrefab;
+            case SeedType.VegetableType.Cucumber: return cucumberPrefab;
+            case SeedType.VegetableType.Tomato: return tomatoPrefab;
+            case SeedType.VegetableType.Cabbage: return cabbagePrefab;
+            case SeedType.VegetableType.Pepper: return pepperPrefab;
+            default: return null;
+        }
     }
 }

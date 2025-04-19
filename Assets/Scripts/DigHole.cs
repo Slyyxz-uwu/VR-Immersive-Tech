@@ -18,7 +18,7 @@ public class TrowelDig : MonoBehaviour
     {
         if (hasDug) return; // ✅ already dug, skip
 
-        if (other.CompareTag("DiggableSoil") && soilWithHolePrefab != null)
+        if ((other.CompareTag("SoilTile") || other.CompareTag("DiggableSoil")) && soilWithHolePrefab != null)
         {
             hasDug = true; // ✅ mark as dug
 

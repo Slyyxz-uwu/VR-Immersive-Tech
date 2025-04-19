@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1465940820440611917, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
       propertyPath: m_TagString
-      value: CucumberSeed
+      value: Seed
       objectReference: {fileID: 0}
     - target: {fileID: 2239346488677967607, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
       propertyPath: m_LocalScale.x
@@ -38,7 +38,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2239346488677967607, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.014
       objectReference: {fileID: 0}
     - target: {fileID: 2239346488677967607, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2934710820986063146, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
+      propertyPath: seedType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7302907546711145176, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -79,14 +83,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1465940820440611917, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7488581429015188668}
+      addedObject: {fileID: 6770475620820733882}
   m_SourcePrefab: {fileID: 100100000, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
 --- !u!1 &1191080296971304095 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1465940820440611917, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
   m_PrefabInstance: {fileID: 351140380934897874}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &7488581429015188668
+--- !u!65 &6770475620820733882
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,5 +109,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.17567122, y: 0.34384295, z: 0.20583497}
-  m_Center: {x: 0.012981221, y: 0.005106386, z: -0.01552804}
+  m_Size: {x: 0.11295192, y: 0.23298487, z: 0.06434165}
+  m_Center: {x: -0.0005875776, y: -0.0029484243, z: -0.004071078}

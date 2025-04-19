@@ -15,6 +15,8 @@ TagManager:
   - PepperSeed
   - SoilTile
   - SeedHole
+  - HoledSoil
+  - Seed
   layers:
   - Default
   - TransparentFX

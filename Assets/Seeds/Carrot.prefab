@@ -101,7 +101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f5c4bd3d6e3aaf64da9f8713878c0e0f, type: 3}
       propertyPath: m_TagString
-      value: CarrotSeed
+      value: Seed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -119,6 +119,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f5c4bd3d6e3aaf64da9f8713878c0e0f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6649775932039166311}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f5c4bd3d6e3aaf64da9f8713878c0e0f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1633497900213926610}
   m_SourcePrefab: {fileID: 100100000, guid: f5c4bd3d6e3aaf64da9f8713878c0e0f, type: 3}
 --- !u!4 &4755537073256384400 stripped
 Transform:
@@ -300,3 +303,16 @@ MonoBehaviour:
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
   m_FarAttachMode: 1
+--- !u!114 &1633497900213926610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5383173097569754410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd2004b695339349b780779c7c17b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedType: 0
