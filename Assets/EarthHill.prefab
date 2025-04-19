@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 2c26b6cf1379cc544a2bcd2267c98099, type: 3}
       propertyPath: m_TagString
-      value: DiggableSoil
+      value: SoilTile
       objectReference: {fileID: 0}
     - target: {fileID: 9211781477787149124, guid: 2c26b6cf1379cc544a2bcd2267c98099, type: 3}
       propertyPath: m_TagString

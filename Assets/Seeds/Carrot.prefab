@@ -122,6 +122,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f5c4bd3d6e3aaf64da9f8713878c0e0f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1633497900213926610}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f5c4bd3d6e3aaf64da9f8713878c0e0f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1735637634411722191}
   m_SourcePrefab: {fileID: 100100000, guid: f5c4bd3d6e3aaf64da9f8713878c0e0f, type: 3}
 --- !u!4 &4755537073256384400 stripped
 Transform:
@@ -315,4 +318,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd2004b695339349b780779c7c17b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedType: 0
+  vegType: 0
+--- !u!114 &1735637634411722191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5383173097569754410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7294866f4d3a74fa6c54e4efa2d3f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantPrefab: {fileID: 3302801503999865966, guid: 9116f50527e74f74497658a2d6272aa8, type: 3}
+  growthDuration: 20
+  riseHeight: 0.2
+  carrotPrefab: {fileID: 3970134999518897415, guid: ba250cbc643e32e4bbe535cb5f8b0f5b, type: 3}
+  cucumberPrefab: {fileID: 1416813049622548777, guid: 269040bbac2347e4792b33ed02603338, type: 3}
+  tomatoPrefab: {fileID: 2084756134169383201, guid: a5fa9ff2c0a4eeb4c981540ed37d1ea5, type: 3}
+  cabbagePrefab: {fileID: 817601119045293464, guid: 2cef9661bb98be54eb08aee3e8af185f, type: 3}
+  pepperPrefab: {fileID: 300625772441490604, guid: 698e5a27338bab842b8965c2c08c0f2f, type: 3}

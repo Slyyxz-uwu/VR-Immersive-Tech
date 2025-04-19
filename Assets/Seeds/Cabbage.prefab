@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd2004b695339349b780779c7c17b08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedType: 3
+  vegType: 3
 --- !u!4 &2239346488677967607 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f5c4bd3d6e3aaf64da9f8713878c0e0f, type: 3}

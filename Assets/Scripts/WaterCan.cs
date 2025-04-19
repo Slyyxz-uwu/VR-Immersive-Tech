@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class WateringCan : MonoBehaviour
 {
@@ -16,38 +17,15 @@ public class WateringCan : MonoBehaviour
     private bool isHeld = false;
 
     [Header("Water Fill Visual")]
-    public GameObject waterPrefab;              // The visual water object
+    public GameObject waterPrefab;              // Visual water object inside can
     public Transform waterSpawnPoint;           // Where the water appears
     public Vector3 waterScale = new Vector3(1f, 1f, 1f);
     private GameObject currentWaterObject;
 
     [Header("Drain Settings")]
-    public float drainTime = 3f;                // Time to fully drain
+    public float drainTime = 3f;
     private float currentDrainTime = 0f;
     private bool isSpraying = false;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Water") && !isFull)
-        {
-            isFull = true;
-
-            if (fillSound) fillSound.Play();
-
-            if (waterPrefab && waterSpawnPoint && currentWaterObject == null)
-            {
-                currentWaterObject = Instantiate(
-                    waterPrefab,
-                    waterSpawnPoint.position,
-                    waterSpawnPoint.rotation,
-                    waterSpawnPoint
-                );
-
-                currentWaterObject.transform.localScale = waterScale;
-                currentDrainTime = 0f;
-            }
-        }
-    }
 
     private void OnEnable()
     {
@@ -65,6 +43,23 @@ public class WateringCan : MonoBehaviour
 
         if (triggerAction != null)
             triggerAction.action.Disable();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Water") && !isFull)
+        {
+            isFull = true;
+
+            if (fillSound) fillSound.Play();
+
+            if (waterPrefab && waterSpawnPoint && currentWaterObject == null)
+            {
+                currentWaterObject = Instantiate(waterPrefab, waterSpawnPoint.position, waterSpawnPoint.rotation, waterSpawnPoint);
+                currentWaterObject.transform.localScale = waterScale;
+                currentDrainTime = 0f;
+            }
+        }
     }
 
     private void OnGrab(SelectEnterEventArgs args)
@@ -94,7 +89,6 @@ public class WateringCan : MonoBehaviour
                 currentDrainTime += Time.deltaTime;
                 float progress = currentDrainTime / drainTime;
                 progress = Mathf.Clamp01(progress);
-
                 currentWaterObject.transform.localScale = Vector3.Lerp(waterScale, Vector3.zero, progress);
 
                 if (progress >= 1f)
@@ -106,19 +100,6 @@ public class WateringCan : MonoBehaviour
         else
         {
             StopSpraying();
-        }
-    }
-
-    private void OnParticleCollision(GameObject other)
-    {
-        if (other.CompareTag("SoilTile"))
-        {
-            GrowthController gc = other.GetComponentInChildren<GrowthController>();
-            if (gc != null)
-            {
-                gc.SetWatered();
-                Debug.Log("[WATER] Soil watered.");
-            }
         }
     }
 

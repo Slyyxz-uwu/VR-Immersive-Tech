@@ -69,6 +69,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2934710820986063146, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
+      propertyPath: vegType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2934710820986063146, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
       propertyPath: seedType
       value: 1
       objectReference: {fileID: 0}
