@@ -9,18 +9,21 @@ public class TrowelDig : MonoBehaviour
     [Tooltip("Particle system to play at dig location.")]
     public ParticleSystem digEffect;
 
+    [Tooltip("Audio source that plays the digging sound.")]
+    public AudioSource digSound;
+
     [Tooltip("How long it takes to fully reveal the hole.")]
     public float digAnimationTime = 1f;
 
-    private bool hasDug = false; // ✅ NEW: prevents re-triggering
+    private bool hasDug = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (hasDug) return; // ✅ already dug, skip
+        if (hasDug) return;
 
         if ((other.CompareTag("SoilTile") || other.CompareTag("DiggableSoil")) && soilWithHolePrefab != null)
         {
-            hasDug = true; // ✅ mark as dug
+            hasDug = true;
 
             Vector3 pos = other.transform.position;
             Quaternion rot = other.transform.rotation;
@@ -28,6 +31,11 @@ public class TrowelDig : MonoBehaviour
 
             Destroy(other.gameObject);
             StartCoroutine(AnimateDugHole(pos, rot, scale));
+
+            if (digSound != null)
+            {
+                digSound.Play();
+            }
         }
     }
 

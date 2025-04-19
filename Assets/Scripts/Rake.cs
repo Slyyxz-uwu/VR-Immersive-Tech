@@ -25,6 +25,9 @@ public class RakeTool : MonoBehaviour
     [Header("Raking Particle Effect")]
     public ParticleSystem rakeParticles;
 
+    [Header("Raking Sound")]
+    public AudioSource rakeSound; // ✅ New
+
     [Header("XR Input")]
     public XRGrabInteractable grabInteractable;
     public InputActionReference triggerAction;
@@ -90,11 +93,9 @@ public class RakeTool : MonoBehaviour
         }
 
         float triggerValue = triggerAction.action.ReadValue<float>();
-
         Vector3 spawnPosition = transform.position;
         spawnPosition.y = 0.01f;
 
-        // Update ghost tile position and show/hide based on spacing
         if (ghostTileInstance != null)
         {
             ghostTileInstance.transform.position = spawnPosition;
@@ -131,11 +132,13 @@ public class RakeTool : MonoBehaviour
             }
         }
 
-        // ✅ Play dust particle burst
+        // ✅ Play particle effect
         if (rakeParticles != null)
-        {
             rakeParticles.Play();
-        }
+
+        // ✅ Play sound effect
+        if (rakeSound != null)
+            rakeSound.Play();
 
         GameObject soilTile = Instantiate(tilledSoilPrefab, spawnPosition, Quaternion.identity);
         placedSoilPositions.Add(spawnPosition);
