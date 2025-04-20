@@ -9,26 +9,24 @@ public class UIControl : MonoBehaviour
     [SerializeField] private GameObject uiCanvas;
     private bool uiActive = false;
 
-    private void OnEnable()
+    // Start is called before the first frame update
+    void Start()
     {
         toggleMenu.action.performed += ToggleMenuCanvas;
-        toggleMenu.action.Enable(); // important!
-    }
-
-    private void OnDisable()
-    {
-        toggleMenu.action.performed -= ToggleMenuCanvas;
-        toggleMenu.action.Disable();
-    }
-
-    private void Start()
-    {
-        uiCanvas.SetActive(false); // Hide UI at start
+        uiCanvas.SetActive(false);
     }
 
     private void ToggleMenuCanvas(InputAction.CallbackContext context)
+
     {
-        uiActive = !uiActive; // <-- this is the fix
+        if (uiActive)
+        {
+            uiActive = true;
+        }
+        else
+        {
+            uiActive = false;
+        }
         uiCanvas.SetActive(uiActive);
     }
 }
