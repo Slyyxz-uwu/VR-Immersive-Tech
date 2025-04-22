@@ -6683,6 +6683,9 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 1717954561962503726, guid: e8e8209b5ce8f14458966d62b5fdd762, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 997758356}
     - targetCorrespondingSourceObject: {fileID: 1680501587, guid: e8e8209b5ce8f14458966d62b5fdd762, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1317039104}
@@ -17109,7 +17112,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0eba1d0d7d2e8f142a89e610fd60eb2d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3f192ef8144c82c49aa72f93709e3550, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -17203,12 +17206,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997758354}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 72.18642, y: 1.3399565, z: 37.768353}
+  m_LocalRotation: {x: -0, y: 0.44789314, z: -0, w: -0.894087}
+  m_LocalPosition: {x: 4.308069, y: 1.1699566, z: 42.04315}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 860905552}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &997945629 stripped
 GameObject:
@@ -24987,7 +24990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac255ba92ab4194c9c908b614aacfd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSource: {fileID: 0}
+  musicSource: {fileID: 1247787593}
 --- !u!4 &2026334269
 Transform:
   m_ObjectHideFlags: 0
@@ -26126,7 +26129,6 @@ SceneRoots:
   - {fileID: 131489800}
   - {fileID: 2026334269}
   - {fileID: 1191952616}
-  - {fileID: 997758356}
   - {fileID: 1118756218}
   - {fileID: 694118411}
   - {fileID: 1467201489}
