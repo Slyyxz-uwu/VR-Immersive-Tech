@@ -80,6 +80,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6d73b8dcbf518214196866ab33ceade6, type: 2}
+    - target: {fileID: 7883957160421516917, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883957160421516917, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883957160421516917, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7883957160421516917, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 8589274267151676823, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
       propertyPath: growthDuration
       value: 50
