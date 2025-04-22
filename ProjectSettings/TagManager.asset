@@ -22,6 +22,7 @@ TagManager:
   - Pepper
   - Cabbage
   - Cucumber
+  - PlayerHead
   layers:
   - Default
   - TransparentFX
