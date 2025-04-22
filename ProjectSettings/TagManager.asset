@@ -17,6 +17,7 @@ TagManager:
   - SeedHole
   - HoledSoil
   - Seed
+  - Player1
   layers:
   - Default
   - TransparentFX
