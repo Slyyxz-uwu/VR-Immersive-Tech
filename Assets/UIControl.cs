@@ -9,7 +9,6 @@ public class UIControl : MonoBehaviour
     [SerializeField] private GameObject uiCanvas;
     private bool uiActive = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         toggleMenu.action.performed += ToggleMenuCanvas;
@@ -17,16 +16,8 @@ public class UIControl : MonoBehaviour
     }
 
     private void ToggleMenuCanvas(InputAction.CallbackContext context)
-
     {
-        if (uiActive)
-        {
-            uiActive = true;
-        }
-        else
-        {
-            uiActive = false;
-        }
+        uiActive = !uiActive; // toggle the state
         uiCanvas.SetActive(uiActive);
     }
 }
