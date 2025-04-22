@@ -4,15 +4,18 @@ using System.Collections;
 public class AutoVineZipline : MonoBehaviour
 {
     [Header("Player")]
-    public Transform playerRig;          // Reference to XR Rig
+    public Transform playerRig;
     public string playerTag = "Player1";
 
     [Header("Vine Points")]
-    public Transform topPoint;           // Empty GameObject at top of vine
-    public Transform bottomPoint;        // Empty GameObject at bottom of vine
+    public Transform topPoint;
+    public Transform bottomPoint;
 
     [Header("Movement")]
     public float climbSpeed = 2f;
+
+    [Header("Sound")]
+    public AudioSource climbSound; // Assign in inspector
 
     private bool isClimbing = false;
 
@@ -25,7 +28,6 @@ public class AutoVineZipline : MonoBehaviour
 
         Vector3 target = (distToTop > distToBottom) ? topPoint.position : bottomPoint.position;
 
-        Debug.Log($"[ZIPLINE] Player entered. Heading to {(distToTop > distToBottom ? "Top" : "Bottom")}");
         StartCoroutine(MovePlayerTo(target));
     }
 
@@ -33,13 +35,23 @@ public class AutoVineZipline : MonoBehaviour
     {
         isClimbing = true;
 
+        if (climbSound != null)
+        {
+            climbSound.loop = true;
+            climbSound.Play();
+        }
+
         while (Vector3.Distance(playerRig.position, destination) > 0.05f)
         {
             playerRig.position = Vector3.MoveTowards(playerRig.position, destination, climbSpeed * Time.deltaTime);
             yield return null;
         }
 
+        if (climbSound != null)
+        {
+            climbSound.Stop();
+        }
+
         isClimbing = false;
-        Debug.Log("[ZIPLINE] Player reached destination.");
     }
 }

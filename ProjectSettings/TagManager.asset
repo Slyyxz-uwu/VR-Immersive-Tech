@@ -18,6 +18,10 @@ TagManager:
   - HoledSoil
   - Seed
   - Player1
+  - Tomato
+  - Pepper
+  - Cabbage
+  - Cucumber
   layers:
   - Default
   - TransparentFX
