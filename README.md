@@ -1,2 +1,3 @@
 # VR-Immersive-Tech
-Repo for VR and Immersive Tech Module 
+Repository for Immersive Technologies - CM4124 Completed by Kinga Kloskowska 
+Due: 24/04/2025
