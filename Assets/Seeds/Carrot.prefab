@@ -335,7 +335,7 @@ MonoBehaviour:
   growthDuration: 20
   riseHeight: 0.2
   carrotPrefab: {fileID: 3970134999518897415, guid: ba250cbc643e32e4bbe535cb5f8b0f5b, type: 3}
-  cucumberPrefab: {fileID: 1416813049622548777, guid: 269040bbac2347e4792b33ed02603338, type: 3}
+  cucumberPrefab: {fileID: 8752296181740585400, guid: 3ad93b644a83ff34eb77ef70e4e85ae2, type: 3}
   tomatoPrefab: {fileID: 2084756134169383201, guid: a5fa9ff2c0a4eeb4c981540ed37d1ea5, type: 3}
   cabbagePrefab: {fileID: 817601119045293464, guid: 2cef9661bb98be54eb08aee3e8af185f, type: 3}
   pepperPrefab: {fileID: 300625772441490604, guid: 698e5a27338bab842b8965c2c08c0f2f, type: 3}

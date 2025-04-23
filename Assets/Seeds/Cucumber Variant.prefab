@@ -13,6 +13,10 @@ PrefabInstance:
       value: Cucumber Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1465940820440611917, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465940820440611917, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
       propertyPath: m_TagString
       value: Seed
       objectReference: {fileID: 0}
@@ -97,8 +101,12 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 8589274267151676823, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
+      propertyPath: cabbagePrefab
+      value: 
+      objectReference: {fileID: 817601119045293464, guid: 2cef9661bb98be54eb08aee3e8af185f, type: 3}
+    - target: {fileID: 8589274267151676823, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}
       propertyPath: growthDuration
-      value: 50
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7915050745922335475, guid: 275e625bdffcb6746a41a4ebf8d0cea2, type: 3}

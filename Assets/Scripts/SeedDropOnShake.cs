@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class SeedDropOnShake : MonoBehaviour
 {
     [Header("Seed Settings")]
-    public GameObject seedPrefab; // Assign specific seed prefab per veggie
+    public GameObject seedPrefab;
     public int maxSeeds = 2;
 
     [Header("Shake Detection")]
@@ -20,6 +20,7 @@ public class SeedDropOnShake : MonoBehaviour
     public float audioCooldown = 0.5f;
 
     private Rigidbody rb;
+    private XRGrabInteractable grab;
     private int seedsDropped = 0;
     private float lastSeedTime = -999f;
     private float lastAudioTime = -999f;
@@ -35,68 +36,103 @@ public class SeedDropOnShake : MonoBehaviour
 
     private void OnEnable()
     {
-        XRGrabInteractable grab = GetComponent<XRGrabInteractable>();
+        grab = GetComponent<XRGrabInteractable>();
         if (grab != null)
         {
             grab.selectEntered.AddListener(OnGrab);
             grab.selectExited.AddListener(OnRelease);
+            Debug.Log("[SEED] Grab events registered!");
+        }
+        else
+        {
+            Debug.LogWarning("[SEED] XRGrabInteractable not found!");
         }
     }
 
     private void OnDisable()
     {
-        XRGrabInteractable grab = GetComponent<XRGrabInteractable>();
         if (grab != null)
         {
             grab.selectEntered.RemoveListener(OnGrab);
             grab.selectExited.RemoveListener(OnRelease);
+            Debug.Log("[SEED] Grab events unregistered.");
         }
     }
 
-    private void OnGrab(SelectEnterEventArgs args) => isHeld = true;
-    private void OnRelease(SelectExitEventArgs args) => isHeld = false;
+    private void OnGrab(SelectEnterEventArgs args)
+    {
+        isHeld = true;
+        Debug.Log("[SEED] Grabbed!");
+    }
+
+    private void OnRelease(SelectExitEventArgs args)
+    {
+        isHeld = false;
+        Debug.Log("[SEED] Released!");
+    }
 
     private void Update()
     {
-        if (!isHeld || seedsDropped >= maxSeeds)
+        if (!isHeld)
+        {
+            Debug.Log("[SEED] Not held, skipping shake check.");
             return;
+        }
+
+        if (seedsDropped >= maxSeeds)
+        {
+            Debug.Log("[SEED] Max seeds dropped, skipping.");
+            return;
+        }
 
         checkTimer += Time.deltaTime;
         if (checkTimer < checkInterval) return;
         checkTimer = 0f;
 
         float velocity = rb.velocity.magnitude;
+        Debug.Log($"[SEED] Velocity: {velocity}");
 
         if (velocity > velocityThreshold)
         {
-            if (Time.time - lastSeedTime > spawnCooldown && seedsDropped < maxSeeds)
+            if (Time.time - lastSeedTime > spawnCooldown)
             {
                 DropSeed();
                 seedsDropped++;
                 lastSeedTime = Time.time;
+                Debug.Log("[SEED] Seed dropped!");
             }
 
             if (Time.time - lastAudioTime > audioCooldown)
             {
                 PlayShakeSound();
                 lastAudioTime = Time.time;
+                Debug.Log("[SEED] Shake sound played.");
             }
 
             if (seedsDropped >= maxSeeds)
+            {
+                Debug.Log("[SEED] Disabling script after max seeds.");
                 enabled = false;
+            }
         }
     }
 
     private void DropSeed()
     {
-        if (seedPrefab == null) return;
+        if (seedPrefab == null)
+        {
+            Debug.LogWarning("[SEED] Seed prefab is missing!");
+            return;
+        }
 
         Vector3 dropPosition = transform.position + new Vector3(0, 0.2f, 0);
         GameObject seed = Instantiate(seedPrefab, dropPosition, Quaternion.identity);
 
         Rigidbody seedRb = seed.GetComponent<Rigidbody>();
         if (seedRb != null)
+        {
             seedRb.velocity = Vector3.down * 0.3f;
+        }
     }
 
     private void PlayShakeSound()
