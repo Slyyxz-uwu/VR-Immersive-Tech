@@ -15,15 +15,19 @@ public class TrowelDig : MonoBehaviour
     [Tooltip("How long it takes to fully reveal the hole.")]
     public float digAnimationTime = 1f;
 
-    private bool hasDug = false;
+    [Tooltip("Cooldown time between digs (seconds).")]
+    public float digCooldown = 1f;
+
+    private bool isCoolingDown = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (hasDug) return;
+        if (isCoolingDown) return;
 
         if ((other.CompareTag("SoilTile") || other.CompareTag("DiggableSoil")) && soilWithHolePrefab != null)
         {
-            hasDug = true;
+            isCoolingDown = true;
+            StartCoroutine(ResetCooldown());
 
             Vector3 pos = other.transform.position;
             Quaternion rot = other.transform.rotation;
@@ -37,6 +41,12 @@ public class TrowelDig : MonoBehaviour
                 digSound.Play();
             }
         }
+    }
+
+    private IEnumerator ResetCooldown()
+    {
+        yield return new WaitForSeconds(digCooldown);
+        isCoolingDown = false;
     }
 
     private IEnumerator AnimateDugHole(Vector3 position, Quaternion rotation, Vector3 targetScale)
